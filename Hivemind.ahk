@@ -18,9 +18,11 @@ IfMsgBox, Yes, Edit
 return
 
 :O:bjgp::Brian Jurgen Gonzalez Padilla
-; Send % "Brian Jurgen Gonzalez Padilla"
-; return
 :O:jugo::Jurgen Gonzalez
+:O:rfc::GOPB990830TT6
+:O:curp::GOPB990830HGTNDR06
+:O:wrath::wrathofhive@outlook.com
+
 :O:ti9::desarrolloti9_lem@castores.com.mx
 :O:cas2::
     SendInput, %testPass13%
@@ -31,35 +33,75 @@ return
 
 ; test IE automation
 #z::
-wb := IEGet("Google")
-wb.Document.All.q.Value := "site:autohotkey.com tutorial"
-wb.Document.All.q.Focus()
-wb.Document.All.btnG.Click()
-While wb.Busy
-Sleep, 100
-; IELoad(wb)
-return
+;internet explorer - get webpage titles and urls for most recently active IE window
+;DetectHiddenWindows, On
+WinGet, hWnd, ID, ahk_class IEFrame
+if !hWnd
+	return
+vOutput := ""
+for oWB in ComObjCreate("Shell.Application").Windows
+{
+	if (oWB.HWND = hWnd)
+	{
+		try vUrl := oWB.document.url
+		catch
+			vUrl := ""
+		try vTitle := oWB.document.title
+		catch
+			vTitle := ""
+		vOutput .= vTitle "`r`n" vUrl "`r`n`r`n"
+	}
+}
+oWB := ""
+vOutput := SubStr(vOutput, 1, -2)
+;Clipboard := vOutput
+MsgBox, % vOutput
+
+; wb := IEGet("Google")
+; wb.Document.All.q.Value := "site:autohotkey.com tutorial"
+; wb.Document.All.q.Focus()
+; wb.Document.All.btnG.Click()
+; While wb.Busy
+; Sleep, 100
+
+; wb := IEGet("Google")
+; wb.Navigate("http://www.autohotkey.com/forum/")
+; While wb.busy
+; Sleep, 100
 
 ; Links := wb.Document.Links
 
+; print all available links on the page
 ; Loop % Links.Length ; check each link
 ; If ((Link := Links[A_Index-1].InnerText) != "") ; if the link is not blank
 ; Msg .= A_Index-1 . " " . Link . "`n" ; add item to the list
 ; MsgBox % Msg ; display the list
 
+; Loop % Links.Length ; check each link
+; ; If (Links[A_Index-1].InnerText = "Advanced Search") { ; replace my name with whatever text you'd rather search for
+; If InStr(Links[A_Index-1].InnerText, "Advanced") { 
+; 		Links[A_Index-1].Click()
+; 		break
+; 	}
+
+return
+
+
 #+z::
+
+
 wb := ComObjCreate("InternetExplorer.Application")
 wb.Visible := True
 wb.Navigate("Google.com")
 While wb.busy
 Sleep, 100
+
 ; IELoad(wb)
-wb.Document.All.q.Value := "site:autohotkey.com tutorial"
-wb.Document.All.q.Focus()
-wb.Document.All.btnG.Click()
-While wb.busy
-Sleep, 100
-; IELoad(wb)
+; wb.Document.All.q.Value := "site:autohotkey.com tutorial"
+; wb.Document.All.q.Focus()
+; wb.Document.All.btnG.Click()
+; While wb.busy
+; Sleep, 100
 return
 
 IEGet(Name="")        ;Retrieve pointer to existing IE window/tab
@@ -162,13 +204,29 @@ F9::
 !^f::
     ClipboardBackup := ClipboardAll
     Clipboard =
+    Send, {Home}
+    Send, +{End}
     Send, ^c
-    dbAndTable := Clipboard
-    dbAndTable := StrSplit(dbAndTable, ".")
-    Sleep, 100
-    searchInFilter(dbAndTable)
+    Send, {right 1}
+    global position := 0
+    dbAndTable := getBetweenFrom()
+    if (position != 0){
+        dbAndTable := StrSplit(dbAndTable, ".")
+        Sleep, 100
+        searchInFilter(dbAndTable)
+    }
     Clipboard := ClipboardBackup
     return
+
+    getBetweenFrom(){
+        position := RegExMatch(Clipboard, "(FROM|from)\S*(a-zA-Z\d)*.(a-zA-Z\d)*\S*", replacements)
+
+        if (position != 0){
+            dbAndTable := SubStr(replacements, 6) ; 6 of "from"
+            dbAndTable := Trim(dbAndTable)
+        }
+        return dbAndTable
+    }
 
     searchInFilter(dbAndTable){
         database := dbAndTable[1]
@@ -219,8 +277,8 @@ F9::
 ; Scintilla12 -> CustomGridControl6
 ; Scintilla6 -> CustomGridControl3
 ^+c::
-    ControlClick, CustomGridControl2, ahk_exe SQLyog.exe, , RIGHT
     Send, ^r        ; SQL shortcut to focus query results
+    ControlClick, , ahk_exe SQLyog.exe, , RIGHT
     Send, {up 2}
     Send, {right 1}
     Send, {up}
