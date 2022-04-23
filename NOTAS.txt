@@ -1,0 +1,426 @@
+correo: desarrolloti9_lem@castores.com.mx
+pass: 27h88Zm4Q9
+   del correo + bitrix + google
+pass git, empleado.castores (permisos): Kastores1
+
+Contraseña curso
+uDesarrollo
+Geaz8Na4+
+
+cybercastores normal
+11040540
+castores
+
+cybercliente plataforma 10.1.8.211
+11040540
+Desarrolloti9_lem
+
+
+slack
+a9b8c7d6
+
+para permisos cybercliente usar jefe inmediato:
+gerentedesarrolloti_lem@castores.com.mx
+
+-----
+ruta compartida
+\\192.168.0.21\f$\usuarios\Desarrollo
+
+ruta proyectos war
+\\192.168.0.21\f$\proyectos\desarrollos
+
+-----------------------------------------------------------
+github
+
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/sshkey
+
+
+git stash push --file.txt
+git push origin <branch>
+git pull origin <branch>
+
+
+------------------------------------------------------------
+
+regex all special characters for cfdi sat description
+[^a-zA-Z\s*áéíóúÁÉÍÓÚ\(\)0-9,."ñ\-/]
+[^a-zA-Z\s*áéíóúÁÉÍÓÚ\(\)0-9,."ñ\-üë“”–/´]
+[^a-zA-Z\s*áéíóúÁÉÍÓÚ\(\)0-9,."ñ\-üë–/´’:#']
+
+“t” de tubo
+â€œTâ€ DE TUBO
+
+Maíz  challengercrisp ‘n dulce congelado
+MAIZ CHALLENGERCRISP â€˜N DULCE CONGELADO
+MAIZ CHALLENGERCRISP â€˜N DULCE CONGELADO
+
+para importar con sql dump (structura y datos) abrir el .sql y correr el drop, create e insert
+
+spring boot error fue porque la clase de controlador estaba fuera del paquete exterior a la clase main, debe ser: com.example.app la principal, y com.example.control el del controlador
+
+solo *{titulo} y ${titulo} funcionan
+
+
+//Template basico thymeleaf fragment
+<!DOCTYPE html>
+<html lang="en">
+  <head th:replace="layout/layout :: head"></head>
+
+  <body>
+    <header th:replace="layout/layout :: header"></header>
+
+    <div class="container py-4">
+      <div class="card">
+        <div class="card-header" th:text="${titulo}"></div>
+
+        <div class="card-body"></div>
+      </div>
+    </div>
+
+    <footer th:replace="layout/layout :: footer"></footer>
+  </body>
+</html>
+
+//--------------------------------------
+
+
+Para generar ssh key
+Hacer un archivo plano donde guardar el ssh
+ssh-keygen en cmd
+sobreescribir
+
+Abrir el ssh con 
+cat ~/.ssh/sshkey.pub
+
+Copiar a github y a maquina
+
+Para activar el agente ssh
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/sshkey
+
+Para agregar tu llave a la maquina/agente
+ssh-add ~/.ssh/sshkey
+
+Para ver las llaves de tu agente
+ssh-agent sh -c 'ssh-add; ssh-add -L'
+
+*Se debe de hacer el proceso de agregar al agente cada vez que se haga pull o push
+
+
+-------------------------------------------
+Para intentar correr el proyecto en netbeans se necesita registrar la base de datos a utilizar en 
+localhost:4848/common/index.jsf
+
+cambiar a jdbc:mysql://10.1.2.35:3306 en server 13 y a jdbc:mysql://10.1.2.52:3306 en server 23
+en ambos lugares y en el servidor 13 y 23 de pruebas y de produccion
+en la parte de Recursos - JDBC - Pools de Conexiones JDBC - Server 13 -> Propiedades adicionales
+
+Despues en aplicaciones hacer click en desplegar y en examinar agregar el war de la ultima version 
+del sistema que requieres, eg. CyberCliente ubicado en carpeta compartida 
+/proyectos/desarrollos/CyberCliente/V3.8.13.0
+
+Despues puedes usar localhost:8080 con tu despliegue de la aplicacion
+
+Despues de hacer tus cambios de la actividad sobre-escribir el archivo redirect (o el equivalente) comentando la ultima version y agregar la descripcion nueva
+
+Despues generar el .war haciendo un clean & build o si falla solamente un clean, buscarlo en la carpeta del proyecto dist y
+
+
+----------------------------------------------------------
+Para utilizar el generador de clases (para dao's y modelos) conectarte a la ip de base de datos, escoger la tabla que deseas y en la carpeta generado abrir los archivos y quitar la parte de los imports que dice "particion"
+
+
+List<? extends HasWord> = List<ChildOfHasWord> as opposed to List<HasWord>
+
+List<? extends HasWord> vs List<? super HasWord> 
+PECS = Producer extends, Consumer super
+
+MySQL sort de campos varchar los ordena el caracter mayor primero, entonces:
+1
+30
+5
+200
+
+si se ordena en descendente:
+5
+30
+200
+1
+
+Para cada actividad:
+Pedir permiso en Github
+
+hacer carpeta y un git init, git remote add origin <repo url>, git pull
+
+ir a la carpeta compartida/proyecto/desarrollos ir al proyecto y la ultima version para copiar el war
+
+descomprimirlo usando el comando
+jar -xvf yourWARfileName.war
+
+y copiar las librerias al proyecto netbeans con add jar y relative path
+
+dar click derecho en Libraries - Propiedades y eliminar todos los que tienen error
+
+crear tu propia rama con el sufijo PROY, TICK, 
+
+------------------------------------------------------
+para ver tickets
+https://10.3.1.228/softexpert/login?page=execution,200,1
+desarrollo1 cas111111
+
+desarrollo2
+cas111111
+
+------------------------------------------------------
+
+
+------------------------------------------------------
+actividad 2
+usuario: 11440004
+password: Castores3*.
+en pruebas: Castores2**
+
+
+
+wsdispensadores
+tothem api = 
+http://tothem.mx/webapi/castores/?key=consumos&vale=1100221000861
+1100217148845
+
+
+urea test wsdispensador
+http://localhost:8080/WSDispensador/wsDispensador?Tester
+
+1100222000240
+1100222000285
+U-19-0200
+
+
+            System.out.println("importe getImporteDieselB: " + importe);
+            System.out.println("precio database: " + PrecioList.get(0).getPrecio_actual());
+            System.out.println("precio service: " + precioActual);
+
+ 003472 - CAMBIO CYBERCLIENTE
+ 005090 - andrea
+ Clientes - Relacion de cliente - Porcentaje de seguro.
+Clientes - Relacion de cliente - Valor declarado.
+
+--------------------------------------------------------------------------------
+jdbc:mysql://10.1.2.20:3306/ Pruebas 13 que se uso para WSDispensador
+
+servidores de produccion
+10.3.1.60
+10.3.1.61
+10.3.1.62
+10.3.1.63
+10.3.1.64
+
+servidores de pruebas
+10.3.1.67
+10.3.1.68
+10.3.1.69
+usuario: root
+pass: castores
+puerto: 22
+
+
+usar filezilla para cambiar el nombre al .war que estaba antes con _old22032022
+usar putty para logearte, ir a la carpeta con
+cd glassfish3/bin y ejecutar comandos
+./asadmin undeploy WSDispensador
+./asadmin deploy WSDispensador.war
+
+apps.castores/ AutorizarDocumentos
+cambio de sistema o control de cambios
+manuel alejandro ramirez lozano
+daniel alberto reyes
+
+Orden de autorizacion:
+arquitecto
+coordinador
+gerente
+usuario
+
+si es .war va daniel morales    // si no esta poner las coordinaciones rodrigo limon
+si es .exe va rosalva 		// si no esta poner las coordinaciones edith
+
+jose manuel
+
+Para probar usar una ruta de produccion seguido del modulo que se modifico:
+10.3.1.60/CyberCliente
+
+------------------------------------------------------------
+TICKETS!!!!
+
+ticket 1: 003472 -> 005925
+
+ticket 004447 conflicto con precio_diesel de 11 en vez de 9.74
+
+ticket 2 del Miercoles 23 a Martes 29
+
+ticket urea por fin Andrea 005090 -> 006781
+
+------------------------------------------------------------
+
+Usuario Fernando Bustos Server pruebas 13   .20
+11960002
+33230
+
+5099.2700
+
+
+
+[{"a": "1100222000514", "c": "U-19-0005", "b": "207.000", "e": "2022-03-30", "d": "16.995", "g": "6380", "f": "13:20:42"}]
+
+java.lang.String	1100222000514
+double			207
+java.lang.String	U-19-0001
+java.lang.String	[{"a": "1608222000015", "c": "U-19-0005", "b": "168.000", "e": "2022-04-20", "d": "10.45", "g": "6380", "f": "13:20:42"}]
+java.lang.String	2022-03-31
+java.lang.String	13:20:42
+double			40.96
+
+
+java.lang.String	1100222000279
+double	200
+java.lang.String	U-19-0005
+java.lang.String	[{"a": "1100222000279", "c": "U-19-0005", "b": "207.000", "e": "2022-03-30", "d": "16.995", "g": "6380", "f": "13:20:42"}]
+java.lang.String	2022-03-30
+java.lang.String	13:20:42
+double	21
+
+
+java.lang.String	1100222000279
+double	200
+java.lang.String	U-19-0070
+java.lang.String	[{"a": "1608222000009", "c": "U-19-0005", "b": "383.00", "e": "2022-04-08", "d": "24.54", "g": "6380", "f": "13:20:42"}]
+java.lang.String	2022-03-30
+java.lang.String	13:20:42
+double	21
+
+
+        boolean permisoEditarCantidadUrea = false;
+        sql = "SELECT valor FROM camiones.parametros WHERE idprograma = 0 AND idparametro = 11;";
+        rs = persistencia.select(sql);
+        if (rs.next()) {
+            Set<String> idpersonalesPermisos = new HashSet(Arrays.asList(rs.getString("valor").split(",")));
+            System.out.println("idpersonalPermisos: "+idpersonalesPermisos);
+            if(idpersonalesPermisos.contains(String.valueOf(tusuarios.getIdpersonal()))){
+                permisoEditarCantidadUrea = true;
+            }
+        }
+
+
+
+    /**
+     * Autor: Jurgen Gonzalez, Fecha: Abril del 2022
+     * Descripcion: Se agrega permiso para generar vales 
+     * complementarios de gastos extra para el prevale de urea
+     * @param idpersonal El numero identificador del personal
+     * @return verdadero si su idpersonal se encuentra en la lista de personas 
+     * con el permiso de generar prevales de urea especiales para gastos extras 
+     * (complementarios)
+     */
+    private boolean permisoPrevaleUreaEspecial(int idpersonal) {
+        boolean permisoPrevaleUreaEspecial = false;
+        ParametrosDao paramsDao = inj.getInstance(ParametrosDao.class);
+        CriteriaBuilder paramscb = new CriteriaBuilder();
+        paramscb.eq("idprograma", 0);
+        paramscb.eq("idparametro", 11);
+        List<Parametros> params = paramsDao.findBy(paramscb);
+        if (!params.isEmpty()) {
+            List<String> idpersonalesPermisos = Arrays.asList(params.get(0).getValor().split(","));
+            if(idpersonalesPermisos.contains(String.valueOf(idpersonal))){
+                permisoPrevaleUreaEspecial = true;
+            }
+        }
+        System.out.println("permisoPrevaleEspecial: "+permisoPrevaleUreaEspecial);
+        return permisoPrevaleUreaEspecial;
+    }
+}
+
+-------------------------------------------------------------
+servidor de empleados permisos
+10.1.8.211
+
+10.1.2.35
+
+
+
+unidades vales operador consulta
+por dias o meses
+
+Java home
+C:\Program Files\Java\jdk-17.0.2
+
+edit path
+C:\Program Files (x86)\Java\jre7\bin
+C:\Program Files (x86)\Java\jre7\bin\client
+C:\Program Files\Java\jdk-17.0.2\bin
+
+edit system variable path
+C:\Program Files\Java\jre1.8.0_271\bin
+C:\Program Files (x86)\Java\jre7\bin
+C:\Program Files (x86)\Java\jre7\bin\client
+
+-f for file -d for directory
+find -name "*.sql" -and -type f 
+
+270
+24.54
+383
+
+QA UTILIZA EL SERVIDOR DE PRODUCCION (13 para cosas de vales Y 23)
+
+		      		     
+            IF (v_centroCosto = 'AU00276' OR v_centroCosto = 'AU00277' OR v_centroCosto = 'AU00278') THEN
+                SET v_conceptoPoliMov ='GASOLINA Y LUBRICANTES DE UNIDADES DE UTIL';
+            ELSE
+                SET v_conceptoPoliMov ='DIESEL B POR COMPROBAR test';
+
+para la relacion de prevale y vale es en 
+siad.relacionprevalesalida2022
+
+proceso completo de vales urea:
+
+Genera Prevale de urea 
+- Con cantidad arbitraria (menor de 75 litros), para esa cantidad se calculan los litros en promedio 
+(con el precio_diesel_b promedio de toda la republica) que se van a surtir.
+-Esos litros se deben de respetar al surtir y como va a existir variacion del precio de urea dependiendo del lugar donde se compro entonces
+se modifica la cantidad recibida del prevale al nuevo monto y se genera el vale
+
+Se manda a despachar y se genera el vale
+- durante el despacho se manda a llamar sp_actualizasaldo
+que a su vez manda a llamar a sp_generavales para el vale y sp_salidascdc para el cargo y abono de la cuenta
+
+correo de bety
+configuracion contable de urea hace poquito mas de un año
+correo de ernesto 
+
+
+Para el error de comprobacion vale diesel b: Conflicto durante generación del vale: Usted no tiene permiso para generar este tipo de vale (tal persona)
+se debe de insertar en las tablas:
+
+
+INSERT INTO `personal`.`grupogasto` (  `idgrupo`,  `idgasto`,  `idpersonal`
+)
+VALUES
+  (
+    '26',    '148',    '14023'
+  );
+
+
+INSERT INTO `personal`.`grupoperso` (  `idgpoperso`,  `idgrupo`,  `idpersonal`,  `permiso`
+)
+VALUES
+  (    '781',    '26',    '14023',    '1'  );
+
+Relacion entre vale y cdc.movimientosfinanzas es 
+
+
+
+
+
+
+
