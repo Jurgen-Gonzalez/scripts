@@ -68,3 +68,10 @@ Send, {Enter}
 #IfWinActive, ahk_exe Explorer.EXE
 ^!c::
     Run, Code.exe
+    return
+
+^!p::
+    Send, ^l
+    Send, mpv .
+    Send, {Enter}
+    return
