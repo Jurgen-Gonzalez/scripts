@@ -336,3 +336,10 @@ F9::
     Run, %ComSpec% /c code %path%,,hide
     Clipboard := ClipboardBackup
     return
+
+^!p::
+    Send, ^l
+    Send, mpv .
+    Send, {Enter}
+    return
+=======
