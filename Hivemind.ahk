@@ -5,11 +5,12 @@ slpTime := 2000
 myId := 11040540
 testPass13 := Castores2*
 prodPass13 := Castores2*
-testPass20 := "Castores3.*"
+testPass20 := "Castores3*"
 urlCyber := "http://cyber.castores.com.mx/LoginUsuario.jsp"
 urlAutoriz := "http://apps.castores.com.mx/AutorizarDocumentos/app/login"
 urlPermisos := "https://empleados.castores.com.mx/login"
 urlTickets := "https://10.3.1.228/softexpert/login?page=execution,200,1"
+urlLocal := "localhost:8080/"
 
 ^!r::Reload
 Sleep 1000 ; If successful, the reload will close this instance during the Sleep, so the line below will never be reached.
@@ -24,38 +25,38 @@ return
 :O:wrath::wrathofhive@outlook.com
 
 :O:ti9::desarrolloti9_lem@castores.com.mx
-:O:cas2::
+::cas2::
     SendInput, %testPass13%
     return
-:O:cas3::
-    SendInput, %testPass20% 
+::cas3::
+    SendInput, %testPass20%{Tab}
     return
 
 ; test IE automation
 #z::
 ;internet explorer - get webpage titles and urls for most recently active IE window
 ;DetectHiddenWindows, On
-WinGet, hWnd, ID, ahk_class IEFrame
-if !hWnd
-	return
-vOutput := ""
-for oWB in ComObjCreate("Shell.Application").Windows
-{
-	if (oWB.HWND = hWnd)
-	{
-		try vUrl := oWB.document.url
-		catch
-			vUrl := ""
-		try vTitle := oWB.document.title
-		catch
-			vTitle := ""
-		vOutput .= vTitle "`r`n" vUrl "`r`n`r`n"
-	}
-}
-oWB := ""
-vOutput := SubStr(vOutput, 1, -2)
-;Clipboard := vOutput
-MsgBox, % vOutput
+; WinGet, hWnd, ID, ahk_class IEFrame
+; if !hWnd
+; 	return
+; vOutput := ""
+; for oWB in ComObjCreate("Shell.Application").Windows
+; {
+; 	if (oWB.HWND = hWnd)
+; 	{
+; 		try vUrl := oWB.document.url
+; 		catch
+; 			vUrl := ""
+; 		try vTitle := oWB.document.title
+; 		catch
+; 			vTitle := ""
+; 		vOutput .= vTitle "`r`n" vUrl "`r`n`r`n"
+; 	}
+; }
+; oWB := ""
+; vOutput := SubStr(vOutput, 1, -2)
+; ;Clipboard := vOutput
+; MsgBox, % vOutput
 
 ; wb := IEGet("Google")
 ; wb.Document.All.q.Value := "site:autohotkey.com tutorial"
@@ -145,26 +146,48 @@ Return True
 ^+l::
     Gui, Add, Text, , Logearte a:
     Gui, Add, DropDownList, vLoginWebsite gOnSelect, CyberCliente||Permisos|Autorizar
+    Gui, Add, Checkbox, vLocal checked, &Local
     Gui, Show
     return
 
 OnSelect:
 Gui, Submit, nohide
 if (LoginWebsite = "CyberCliente"){
-    MsgBox, "a"
+    runFirefox()
+    if(Local = 0)
+        Run, %urlCyber%
+    else{
+        SendInput, ^l%urlLocal%%LoginWebsite%{Enter}
+    }
+}
+else if (LoginWebsite = "Permisos"){
+    runFirefox()
+    if(Local = 0)
+        Run, %urlPermisos%
+    else{
+
+    }
+}
+else if (LoginWebsite = "Autorizar"){
+    runFirefox()
+    if(Local = 0)
+        Run, %urlAutoriz%
+    else{
+
+    }
+}
+else
+    MsgBox, "d"
+Gui, Destroy
+return
+
+runFirefox(){
     if WinExist("ahk_class MozillaWindowClass") or WinExist("ahk_exe firefox.exe")
         WinActivate
     else
         Run C:\programs\mozilla\firefox.exe 
-    Run, %urlCyber%
+    return
 }
-else if (LoginWebsite = "Permisos")
-    MsgBox, "b"
-else if (LoginWebsite = "Autorizar")
-    MsgBox, "c"
-else
-    MsgBox, "d"
-return
 
 ; Shortcut to open calculator
 #c::
@@ -182,22 +205,23 @@ return
 :O:cam::camiones
 :O:per::personal
 :O:bit::bitacora
-:O:ur::urea
+; :O:ur::urea
+:O:tal::talones
 :O:uni::unidades
 
 ; Shortcut for basic query
 !s::
-    Send, SELECT * FROM 
+    SendInput % "SELECT * FROM "
     return
 
 ; Shortcut for basic query
 ::self::
-    Send % "SELECT * FROM "
+    SendInput % "SELECT * FROM "
     return
 
 ; Excecute the line to the left if you are positioned after the semicolon
 F9::
-    Send, {left 1}{F9}{right 1}
+    SendInput, {left 1}{F9}{right 1}
     return
 
 ; Search in SQLyog filter to get the table fast and be able to produce an insert, select, delete, update
@@ -220,11 +244,14 @@ F9::
 
     getBetweenFrom(){
         position := RegExMatch(Clipboard, "(FROM|from)\S*(a-zA-Z\d)*.(a-zA-Z\d)*\S*", replacements)
+        ; MsgBox, %position%
+        ; MsgBox, %dbAndTable%
 
         if (position != 0){
             dbAndTable := SubStr(replacements, 6) ; 6 of "from"
             dbAndTable := Trim(dbAndTable)
         }
+        ; MsgBox, %dbAndTable%
         return dbAndTable
     }
 
@@ -245,6 +272,7 @@ F9::
         Send, ^+b
         Send, %table%
         Send, {Enter}
+        ; MsgBox, %dbAndTable%
     }
 
 ; Delete blank spaces to format inserts, deletes, updates and selects created with SQLyog shortcut
@@ -258,16 +286,16 @@ F9::
     GuiClose:
     ButtonOK:
         Gui, Submit 
-        Send, {End}
+        SendInput, {End}
 
         Loop, %Num%
         {
             ; your script to loop here
 
-            Send, {Del}
-            Send, {End}
+            SendInput, {Del}
+            SendInput, {End}
         }
-        Send, {Home}
+        SendInput, {Home}
         Gui, Destroy
     return
 
@@ -278,7 +306,9 @@ F9::
 ; Scintilla6 -> CustomGridControl3
 ^+c::
     Send, ^r        ; SQL shortcut to focus query results
-    ControlClick, , ahk_exe SQLyog.exe, , RIGHT
+    ; ControlClick, , ahk_exe SQLyog.exe, , RIGHT
+    MouseGetPos, StartX, StartY
+    Click, 1860 970 Right
     Send, {up 2}
     Send, {right 1}
     Send, {up}
@@ -286,6 +316,7 @@ F9::
     Sleep, 100
     Send, {Enter}
     Send, ^e       ; SQL shortcut to focus on query file
+    MouseMove, StartX, StartY
     return
 
 #IfWinActive, ahk_exe Explorer.EXE
@@ -293,14 +324,14 @@ F9::
 ^!c::
     ClipboardBackup := ClipboardAll
     Clipboard =
-    Send, {Space}{F2}^a^c{Esc}
+    SendInput, {Space}{F2}^a^c{Esc}
     filename := Clipboard
     Sleep, 200
-    ControlSend, , {Home}, ahk_class ExploreWClass 
+    ControlSend, {Home}, ahk_class ExploreWClass 
     Sleep, 100
-    Send, ^c
+    SendInput, ^c
     path := Clipboard
-    Send, {Esc}+{Tab}+{Tab}+{Tab}+{Tab}+{Tab}+{Tab}+{Tab}
+    SendInput, {Esc}+{Tab}+{Tab}+{Tab}+{Tab}+{Tab}+{Tab}+{Tab}
     ; MsgBox, %path%%filename%
     Run, %ComSpec% /c code %path%,,hide
     Clipboard := ClipboardBackup
